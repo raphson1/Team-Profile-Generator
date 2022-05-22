@@ -2,14 +2,12 @@ const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const bodyContent = require("./src/htmlBody");
 
 const inquirer = require("inquirer");
 const fs = require('fs');
-inquirer.registerPrompt("loop", require("inquirer-loop")(inquirer));
 
 var employee = [ ]
-
-
 
 inquirer.prompt([
         {
@@ -54,6 +52,11 @@ inquirer.prompt([
                     menu()
                 } else{
                   console.log(employee)
+                  const pageContent = bodyContent(employee);
+                  fs.writeFile('dist/index.html', pageContent, (err) =>
+                  err ? console.log(err) : console.log('Successfully created index.html')
+    );
+
                 }
 
             })
@@ -97,7 +100,7 @@ inquirer.prompt([
             {
                 type: "input",
                 name: "github",
-                message: "what os your GitHub user name?"
+                message: "what is your GitHub user name?"
             }
         ]).then(response => {
             const engineer = new Engineer(response.name, response.id, response.email, response.github)
@@ -127,10 +130,10 @@ inquirer.prompt([
             {
                 type: "input",
                 name: "school",
-                message: "what os your school?"
+                message: "what is your school?"
             }
         ]).then(response => {
-            const intern = new Intern(response.name, response.id, response.email, response.school )
+            const intern = new Intern(response.name, response.id, response.email, response.school)
             employee.push(intern)
             addEmployee()
         })
