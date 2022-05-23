@@ -2,7 +2,7 @@ const Manager = require('../lib/Manager');
 
 describe("Manager Test", () => {
     describe("Object Creation", () => {
-        describe("Should return Manager", () =>{
+        it("Should return Manager", () =>{
             const manager = new Manager("Eric", "89", "raphsoneric@gmail.com", "7378438010")
             expect(manager.getName()).toEqual("Eric");
             expect(manager.getId()).toEqual("89");

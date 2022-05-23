@@ -9,7 +9,7 @@ describe ("Engineer Test", () => {
             expect(engineer.getEmail()).toEqual("raphsoneric@gmail.com");
             expect(engineer.getGithub()).toEqual("raphson1");
             
-            expect(engineer.get()).toEqual("Engineer");
+            expect(engineer.getRole()).toEqual("Engineer");
         })
     })
 })
