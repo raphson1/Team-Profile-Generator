@@ -6,9 +6,9 @@ const bodyContent = require("./src/htmlBody");
 
 const inquirer = require("inquirer");
 const fs = require('fs');
-
+// an array that will be storing the response from the user input
 var employee = [ ]
-
+// manager info
 inquirer.prompt([
         {
             type: "input",
@@ -37,7 +37,7 @@ inquirer.prompt([
         addEmployee()
 
     })
-
+    // a function that will be asking the user if a new employee will be added
     function addEmployee(){
        
         inquirer.prompt([
@@ -47,30 +47,26 @@ inquirer.prompt([
                     message: "do you want to add another employee?"
                 }
 
-            ]).then(choice => {
-                if(choice.name === true){
-                    menu()
-                } else{
-                  console.log(employee)
-                  const pageContent = bodyContent(employee);
-                  fs.writeFile('dist/index.html', pageContent, (err) =>
-                  err ? console.log(err) : console.log('Successfully created index.html')
-    );
-
+        ]).then(choice => {
+            if(choice.name === true){
+                menu()
+            } else{
+                const pageContent = bodyContent(employee);
+                fs.writeFile('dist/index.html', pageContent, (err) =>
+                    err ? console.log(err) : console.log('Successfully created index.html')
+                 );
                 }
 
             })
     }
-
+    // menu function for selecting between intern and engineer
     function menu(){
-        
         inquirer.prompt([
             {
                 type: "list",
                 name: "selection",
                 choices: ["Engineer", "Intern"]
             }
-
         ]).then(response => {
             if(response.selection === "Engineer"){
                 addEngineer()
@@ -80,6 +76,7 @@ inquirer.prompt([
         })
     };
 
+    // Ingineer function 
     function addEngineer(){
         inquirer.prompt([
             {
@@ -109,7 +106,7 @@ inquirer.prompt([
         })
         
     };
-
+    // Intern function
     function addIntern(){
         inquirer.prompt([
             {
